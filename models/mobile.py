@@ -150,31 +150,31 @@ class MobileNetV3(nn.Module):
         self.features = nn.Sequential(*layers)
         # building last several layers
         self.conv = conv_1x1_bn(input_channel, exp_size)
+        #
+        # self.layer5a = PyramidPool(960, 512, 2)  # 2048,1024
+        # self.layer5b = PyramidPool(960, 512, 2)
+        # self.layer5c = PyramidPool(960, 512, 3)
+        # self.layer5d = PyramidPool(960, 512, 6)
 
-        self.layer5a = PyramidPool(960, 512, 2)  # 2048,1024
-        self.layer5b = PyramidPool(960, 512, 2)
-        self.layer5c = PyramidPool(960, 512, 3)
-        self.layer5d = PyramidPool(960, 512, 6)
-
-        self.final = nn.Sequential(
-            nn.Conv2d(3008, 512, 3, padding=1, bias=False),  # 4096,3072
-            nn.BatchNorm2d(512, momentum=.95),
-            nn.ReLU(inplace=True),
-            nn.Conv2d(512, num_classes, 1),
-        )
+        # self.final = nn.Sequential(
+        #     nn.Conv2d(3008, 512, 3, padding=1, bias=False),  # 4096,3072
+        #     nn.BatchNorm2d(512, momentum=.95),
+        #     nn.ReLU(inplace=True),
+        #     nn.Conv2d(512, num_classes, 1),
+        # )
 
         self._initialize_weights()
 
     def forward(self, x):
         x = self.features(x)
 
-        x = self.final(torch.cat([
-            x,
-            self.layer5a(x),
-            self.layer5b(x),
-            self.layer5c(x),
-            self.layer5d(x),
-        ], 1))
+        # x = self.final(torch.cat([
+        #     x,
+        #     self.layer5a(x),
+        #     self.layer5b(x),
+        #     self.layer5c(x),
+        #     self.layer5d(x),
+        # ], 1))
 
         x = self.conv(x)
 
