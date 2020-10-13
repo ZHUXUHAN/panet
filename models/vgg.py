@@ -37,7 +37,6 @@ class Encoder(nn.Module):
         self._init_weights()
 
     def forward(self, x):
-        print(self.features(x).shape)
         return self.features(x)
 
     def _make_layer(self, n_convs, in_channels, out_channels, dilation=1, lastRelu=True):

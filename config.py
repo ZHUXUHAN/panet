@@ -27,15 +27,15 @@ def cfg():
     input_size = (417, 417)
     seed = 1234
     cuda_visable = '0, 1, 2, 3, 4, 5, 6, 7'
-    gpu_id = 1
-    mode = 'test' # 'train' or 'test'
+    gpu_id = 2
+    mode = 'train' # 'train' or 'test'
 
 
     if mode == 'train':
         dataset = 'VOC'  # 'VOC' or 'COCO'
         # n_steps = 200000
         n_steps = 30000
-        label_sets = 3 # 0-split1
+        label_sets = 1 # 0-split1
         batch_size = 1
         # lr_milestones = [10000, 20000, 40000, 60000, 80000, 100000, 160000, 200000]
         lr_milestones = [10000, 20000, 30000]
@@ -62,7 +62,7 @@ def cfg():
 
     elif mode == 'test':
         notrain = False
-        snapshot = '/home/voc_/PANet-master/runs/PANet_VOC_align_sets_3_1way_5shot_[train]/1/snapshots/30000.pth'
+        snapshot = '/home/voc_/PANet-master/runs/PANet_VOC_align_sets_0_1way_1shot_[train]/42/snapshots/30000.pth'
         n_runs = 5
         n_steps = 1000
         batch_size = 1

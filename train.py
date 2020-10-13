@@ -77,7 +77,7 @@ def main(_run, _config, _log):
 
     _log.info('###### Set optimizer ######')
     optimizer = torch.optim.SGD(model.parameters(), **_config['optim'])
-    # scheduler = MultiStepLR(optimizer, milestones=_config['lr_milestones'], gamma=0.1)
+    scheduler = MultiStepLR(optimizer, milestones=_config['lr_milestones'], gamma=0.1)
     solver_dict =  {
         'gamma': 0.1,
         'warm_up_iters':  2000,
@@ -86,7 +86,7 @@ def main(_run, _config, _log):
         'warm_up_factor': 0.1
     }
 
-    scheduler = Adjust_Learning_Rate(optimizer, solver_dict)
+    # scheduler = Adjust_Learning_Rate(optimizer, solver_dict)
     criterion = nn.CrossEntropyLoss(ignore_index=_config['ignore_label'])
 
     i_iter = 0
